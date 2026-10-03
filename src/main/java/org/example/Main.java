@@ -1,17 +1,35 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import org.example.actions.InitAction;
+import org.example.actions.TurnAction;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+import java.util.Random;
+
+public class Main {
+
+    static void main() {
+        Simulation simulation = new Simulation();
+
+        PathFinder pathFinder = new PathFinder(simulation.gameMap);
+        for (InitAction action : simulation.initActions) {
+            action.create(simulation.gameMap);
         }
+
+        while (true){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.print("\033[H\033[2J");
+            simulation.renderer.render(simulation.gameMap);
+            System.out.println();
+            for (TurnAction action : simulation.turnActions) {
+                action.makeMove(simulation.gameMap, pathFinder);
+            }
+        }
+
+
     }
+
 }
