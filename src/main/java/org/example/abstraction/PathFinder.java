@@ -1,11 +1,8 @@
-/*
-package org.example;
+package org.example.abstraction;
 
-import org.example.abstraction.Coordinate;
-import org.example.abstraction.Entity;
+import org.example.GameMap;
 import org.example.dynamic_entity.Carrot;
 import org.example.dynamic_entity.Rabbit;
-import org.example.dynamic_entity.Wolf;
 import org.example.static_entity.Rock;
 
 import java.util.*;
@@ -38,14 +35,9 @@ public class PathFinder {
                 if (gameMap.getEntity(coordinate) instanceof Rock) {
                     continue;
                 }
-                if (hunter instanceof Wolf){
-                    if (gameMap.getEntity(coordinate) instanceof Wolf || gameMap.getEntity(coordinate) instanceof Carrot){
-                        continue;
-                    }
-                }
 
                 if (hunter instanceof Rabbit){
-                    if (gameMap.getEntity(coordinate) instanceof Rabbit || gameMap.getEntity(coordinate) instanceof Wolf){
+                    if (gameMap.getEntity(coordinate) instanceof Rabbit ){
                         continue;
                     }
                 }
@@ -64,9 +56,8 @@ public class PathFinder {
         List<Coordinate> path = new ArrayList<>();
         queue.add(currentPosition);
         visited.put(currentPosition, null);
-        if (hunter instanceof Wolf) {
-            toHunt = Rabbit.class;
-        } else if (hunter instanceof Rabbit) {
+
+        if (hunter instanceof Rabbit) {
             toHunt = Carrot.class;
         }
 
@@ -98,4 +89,5 @@ public class PathFinder {
 
 }
 
-*/
+
+

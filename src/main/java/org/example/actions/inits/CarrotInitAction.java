@@ -12,8 +12,12 @@ import static org.example.Constants.GRID_ROW;
 
 public class CarrotInitAction extends InitAction {
 
+    public CarrotInitAction(GameMap gameMap) {
+        super(gameMap);
+    }
+
     @Override
-    public void create(GameMap gameMap) {
+    public void create() {
         int carrotCounts = 0;
         while (carrotCounts<=8) {
             Coordinate coordinate = new Coordinate(random.nextInt(GRID_ROW), random.nextInt(GRID_COL));

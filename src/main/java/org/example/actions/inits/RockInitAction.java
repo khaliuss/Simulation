@@ -13,8 +13,12 @@ import static org.example.Constants.GRID_ROW;
 
 public class RockInitAction extends InitAction {
 
+    public RockInitAction(GameMap gameMap) {
+        super(gameMap);
+    }
+
     @Override
-    public void create(GameMap gameMap) {
+    public void create() {
         int count = 0;
         while (count<=5) {
             Coordinate coordinate = new Coordinate(random.nextInt(GRID_ROW), random.nextInt(GRID_COL));

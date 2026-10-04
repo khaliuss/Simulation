@@ -1,3 +1,4 @@
+/*
 package org.example.actions.turns;
 
 import org.example.GameMap;
@@ -12,36 +13,12 @@ import java.util.*;
 
 public class WolfTurnAction extends TurnAction {
 
-    private Deque<Coordinate> targetQueue = new ArrayDeque<>();
 
-    @Override
-    public void makeMove(GameMap map, PathFinder pathFinder) {
-        List<Coordinate> allRabbitsCoordinate = new ArrayList<>();
-        for (Map.Entry<Coordinate, Entity> entity : map.getEntities().entrySet()) {
-            if (entity.getValue() instanceof Wolf) {
-                allRabbitsCoordinate.add(entity.getKey());
-            }
-        }
-
-        for (Coordinate coordinate : allRabbitsCoordinate) {
-            if (coordinate != null) {
-                Entity entity = map.getEntity(coordinate);
-                targetQueue.addAll(pathFinder.targetCoordinate(coordinate,entity));
-                Coordinate targetCoordinate = targetQueue.poll();
-                if (targetCoordinate == null) {
-                    return;
-                }
-                map.putEntity(targetCoordinate, map.getEntity(coordinate));
-                map.deleteEntity(coordinate);
-                targetQueue.clear();
-            }
-        }
-
-    }
 
 }
 
 
+*/
 /*
             if (coordinate != null) {
                 Entity entity = map.getEntity(coordinate);
@@ -59,3 +36,4 @@ public class WolfTurnAction extends TurnAction {
                 targetQueue.clear();
             }
 */
+

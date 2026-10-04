@@ -1,3 +1,4 @@
+/*
 package org.example.actions.inits;
 
 import org.example.GameMap;
@@ -22,3 +23,4 @@ public class WolfInitAction extends InitAction {
         }
     }
 }
+*/

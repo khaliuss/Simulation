@@ -1,5 +1,7 @@
 package org.example.abstraction;
 
+
+
 public abstract class Creature extends Entity {
 
     protected final int speed = 1;
@@ -7,7 +9,6 @@ public abstract class Creature extends Entity {
 
     public Creature(Coordinate coordinate) {
         super(coordinate);
-
     }
 
     public abstract void makeMove();

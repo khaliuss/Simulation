@@ -7,5 +7,5 @@ public abstract class Herbivore extends Creature {
         super(coordinate);
     }
 
-    public abstract void Eat();
+    public abstract void eat();
 }

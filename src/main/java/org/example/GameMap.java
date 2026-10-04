@@ -1,11 +1,14 @@
 package org.example;
 
 import org.example.abstraction.Coordinate;
+import org.example.abstraction.Creature;
 import org.example.abstraction.Entity;
 import org.example.actions.inits.CarrotInitAction;
 import org.example.dynamic_entity.Carrot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameMap {
 
@@ -14,6 +17,16 @@ public class GameMap {
 
     public HashMap<Coordinate, Entity> getEntities() {
         return entities;
+    }
+
+    public List<Creature> getCreatures() {
+        List<Creature> creatures = new ArrayList<>();
+        for (Entity entity : entities.values()){
+            if (entity instanceof Creature creature){
+                creatures.add(creature);
+            }
+        }
+        return creatures;
     }
 
     public void putEntity(Coordinate coordinate, Entity entity) {
@@ -26,7 +39,7 @@ public class GameMap {
 
     public void deleteEntity(Coordinate coordinate) {
         if (carrotAmount() < 1){
-            new CarrotInitAction().create(this);
+            new CarrotInitAction(this).create();
         }
         entities.remove(coordinate);
     }
