@@ -12,8 +12,9 @@ public class Simulation {
     GameMap gameMap = new GameMap();
     PathFinder pathFinder = new PathFinder(gameMap);
     Renderer renderer = new Renderer();
+    private int moveCounter = 0;
 
-    List<InitAction> initActions = List.of(
+    private final List<InitAction> initActions = List.of(
             new RabbitInit(pathFinder, gameMap),
             new WolfInit(pathFinder, gameMap),
             new CarrotInit(gameMap),
@@ -21,8 +22,42 @@ public class Simulation {
             new TreeInit(gameMap)
     );
 
-    List<TurnAction> turnActions = List.of(
+    private final List<TurnAction> turnActions = List.of(
             new CreatureTurn(gameMap)
     );
+
+    public void creat() {
+        for (InitAction action : initActions) {
+            action.create();
+        }
+    }
+
+    public void nextTurn() {
+        System.out.print("\033[H\033[2J");
+        renderer.render(gameMap);
+        System.out.println();
+        for (TurnAction action : turnActions) {
+            action.makeMove();
+        }
+        moveCounter++;
+    }
+
+
+
+    public void startSimulation() {
+        while (true){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            nextTurn();
+        }
+    }
+
+    public void pauseSimulation() {
+        System.exit(0);
+    }
+
 
 }

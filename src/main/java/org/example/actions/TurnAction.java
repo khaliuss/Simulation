@@ -1,6 +1,9 @@
 package org.example.actions;
 
 import org.example.GameMap;
+import org.example.actions.inits.*;
+
+import java.util.List;
 
 public abstract class TurnAction extends Action {
 
@@ -11,4 +14,5 @@ public abstract class TurnAction extends Action {
     }
 
     public abstract void makeMove();
+
 }

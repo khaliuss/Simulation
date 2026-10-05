@@ -1,8 +1,11 @@
 package org.example.actions;
 
 import org.example.GameMap;
+import org.example.PathFinder;
+import org.example.actions.inits.*;
 
 
+import java.util.List;
 import java.util.Random;
 
 public abstract class InitAction extends Action {
@@ -13,6 +16,7 @@ public abstract class InitAction extends Action {
     protected InitAction(GameMap gameMap) {
         this.gameMap = gameMap;
     }
+
 
 
     public abstract void create();

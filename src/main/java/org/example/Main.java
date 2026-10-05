@@ -1,33 +1,32 @@
 package org.example;
 
-import org.example.actions.InitAction;
-import org.example.actions.TurnAction;
+import java.util.Scanner;
 
 
 public class Main {
 
     static void main() {
         Simulation simulation = new Simulation();
-
-        for (InitAction action : simulation.initActions) {
-            action.create();
-        }
+        simulation.creat();
+        Scanner scanner = new Scanner(System.in);
 
         while (true){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.print("\033[H\033[2J");
-            simulation.renderer.render(simulation.gameMap);
-            System.out.println();
-            for (TurnAction action : simulation.turnActions) {
-                action.makeMove();
+            String choice = makeChoice(scanner);
+
+            switch (choice){
+                case  "1" -> simulation.startSimulation();
+                case "2" -> simulation.pauseSimulation();
+                case "3" -> simulation.nextTurn();
+                default -> System.out.println("Введите коректные значения!!!");
             }
         }
 
 
+    }
+
+    private static String makeChoice(Scanner scanner){
+        System.out.print("Запустить бесконечный цикл симуляции [1] Остановить симуляцию [2] сделать один ход [3]: ");
+        return scanner.nextLine();
     }
 
 
