@@ -19,11 +19,11 @@ public class Wolf extends Predator {
 
     @Override
     public void makeMove() {
+        this.hp -= 2;
         if (this.hp <= 0) {
             gameMap.deleteEntity(this.coordinate);
             return;
         }
-        this.hp -= 1;
         targetQueue.addAll(pathFinder.targetCoordinate(coordinate, this));
         for (int i = 0; i < speed; i++) {
             Coordinate newCoordinate = targetQueue.poll();
@@ -32,7 +32,7 @@ public class Wolf extends Predator {
             }
             if (gameMap.getEntity(newCoordinate) instanceof Herbivore herbivore) {
                 attack(herbivore);
-                if (herbivore.killed()){
+                if (herbivore.isDead()){
                     gameMap.putEntity(newCoordinate, this);
                     gameMap.deleteEntity(coordinate);
                     this.coordinate = newCoordinate;
@@ -47,10 +47,15 @@ public class Wolf extends Predator {
     }
 
     @Override
+    public boolean isDead() {
+        return this.hp<=0;
+    }
+
+    @Override
     public void attack(Herbivore target) {
         target.wounded(30);
-        if (target.killed()) {
-            this.hp += 30;
+        if (target.isDead()) {
+            this.hp = Math.min(hp+30,100);
         }
     }
 

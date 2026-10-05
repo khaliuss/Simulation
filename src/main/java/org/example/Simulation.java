@@ -14,8 +14,8 @@ public class Simulation {
     Renderer renderer = new Renderer();
 
     List<InitAction> initActions = List.of(
-            new WolfInit(pathFinder, gameMap),
             new RabbitInit(pathFinder, gameMap),
+            new WolfInit(pathFinder, gameMap),
             new CarrotInit(gameMap),
             new RockInit(gameMap),
             new TreeInit(gameMap)

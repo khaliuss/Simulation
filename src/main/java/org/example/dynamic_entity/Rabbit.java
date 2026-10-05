@@ -43,6 +43,11 @@ public class Rabbit extends Herbivore {
     }
 
     @Override
+    public boolean isDead() {
+        return this.hp<=0;
+    }
+
+    @Override
     public void eat() {
         this.hp = Math.min(hp+10,100);
     }
@@ -50,16 +55,9 @@ public class Rabbit extends Herbivore {
     @Override
     public void wounded(int attackLevel) {
         this.hp-=attackLevel;
+        gameMap.deleteEntity(this.coordinate);
     }
 
-    @Override
-    public boolean killed() {
-        if (this.hp<=0){
-            gameMap.deleteEntity(coordinate);
-            return true;
-        }
-        return false;
-    }
 
 
     @Override

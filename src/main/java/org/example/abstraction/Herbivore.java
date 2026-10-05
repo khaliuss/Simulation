@@ -14,5 +14,5 @@ public abstract class Herbivore extends Creature {
 
     public abstract void wounded(int attackLevel);
 
-    public abstract boolean killed();
+//    public abstract boolean killed();
 }
