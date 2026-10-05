@@ -1,8 +1,6 @@
-/*
 package org.example;
 
-import org.example.abstraction.Coordinate;
-import org.example.abstraction.Entity;
+import org.example.abstraction.*;
 import org.example.dynamic_entity.Carrot;
 import org.example.dynamic_entity.Rabbit;
 import org.example.dynamic_entity.Wolf;
@@ -29,23 +27,23 @@ public class PathFinder {
     int[] dRow = new int[]{0, -1, -1, -1, 0, +1, +1, +1};
     int[] dCol = new int[]{+1, +1, 0, -1, -1, -1, 0, +1};
 
-    private void findAvailable(Coordinate cameFrom, Entity hunter) {
+    private void findAvailable(Coordinate cameFrom, Entity foodSeeker) {
         for (int i = 0; i < 8; i++) {
             int moveRow = dRow[i] + cameFrom.coordinateX;
             int moveCol = dCol[i] + cameFrom.coordinateY;
             if ((moveRow >= 0 && moveRow < GRID_ROW) && (moveCol >= 0 && moveCol < GRID_COL)) {
                 Coordinate coordinate = new Coordinate(moveRow, moveCol);
-                if (gameMap.getEntity(coordinate) instanceof Rock) {
+                if (gameMap.getEntity(coordinate) instanceof Obstacle) {
                     continue;
                 }
-                if (hunter instanceof Wolf){
-                    if (gameMap.getEntity(coordinate) instanceof Wolf || gameMap.getEntity(coordinate) instanceof Carrot){
+                if (foodSeeker instanceof Predator){
+                    if (gameMap.getEntity(coordinate) instanceof Predator || gameMap.getEntity(coordinate) instanceof Carrot){
                         continue;
                     }
                 }
 
-                if (hunter instanceof Rabbit){
-                    if (gameMap.getEntity(coordinate) instanceof Rabbit || gameMap.getEntity(coordinate) instanceof Wolf){
+                if (foodSeeker instanceof Herbivore){
+                    if (gameMap.getEntity(coordinate) instanceof Herbivore || gameMap.getEntity(coordinate) instanceof Predator){
                         continue;
                     }
                 }
@@ -58,15 +56,15 @@ public class PathFinder {
         }
     }
 
-    public List<Coordinate> targetCoordinate(Coordinate currentPosition, Entity hunter) {
+    public List<Coordinate> targetCoordinate(Coordinate currentPosition, Entity foodSeeker) {
         queue.clear();
         visited.clear();
         List<Coordinate> path = new ArrayList<>();
         queue.add(currentPosition);
         visited.put(currentPosition, null);
-        if (hunter instanceof Wolf) {
+        if (foodSeeker instanceof Wolf) {
             toHunt = Rabbit.class;
-        } else if (hunter instanceof Rabbit) {
+        } else if (foodSeeker instanceof Rabbit) {
             toHunt = Carrot.class;
         }
 
@@ -89,7 +87,7 @@ public class PathFinder {
                 path.removeFirst();
                 return path;
             } else {
-                findAvailable(current, hunter);
+                findAvailable(current, foodSeeker);
             }
         }
 
@@ -98,4 +96,3 @@ public class PathFinder {
 
 }
 
-*/

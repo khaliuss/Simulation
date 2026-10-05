@@ -6,10 +6,10 @@ import org.example.actions.TurnAction;
 
 import java.util.List;
 
-public class RabbitTurnAction extends TurnAction {
+public class CreatureTurn extends TurnAction {
 
 
-    public RabbitTurnAction(GameMap gameMap) {
+    public CreatureTurn(GameMap gameMap) {
         super(gameMap);
     }
 

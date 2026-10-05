@@ -1,12 +1,9 @@
 package org.example;
 
-import org.example.abstraction.PathFinder;
 import org.example.actions.InitAction;
 import org.example.actions.TurnAction;
-import org.example.actions.inits.CarrotInitAction;
-import org.example.actions.inits.RabbitInitAction;
-import org.example.actions.inits.RockInitAction;
-import org.example.actions.turns.RabbitTurnAction;
+import org.example.actions.inits.*;
+import org.example.actions.turns.CreatureTurn;
 
 import java.util.List;
 
@@ -17,13 +14,15 @@ public class Simulation {
     Renderer renderer = new Renderer();
 
     List<InitAction> initActions = List.of(
-            new RabbitInitAction(pathFinder, gameMap),
-            new CarrotInitAction(gameMap),
-            new RockInitAction(gameMap)
+            new WolfInit(pathFinder, gameMap),
+            new RabbitInit(pathFinder, gameMap),
+            new CarrotInit(gameMap),
+            new RockInit(gameMap),
+            new TreeInit(gameMap)
     );
 
     List<TurnAction> turnActions = List.of(
-            new RabbitTurnAction(gameMap)
+            new CreatureTurn(gameMap)
     );
 
 }

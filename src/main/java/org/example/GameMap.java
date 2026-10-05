@@ -3,7 +3,7 @@ package org.example;
 import org.example.abstraction.Coordinate;
 import org.example.abstraction.Creature;
 import org.example.abstraction.Entity;
-import org.example.actions.inits.CarrotInitAction;
+import org.example.actions.inits.CarrotInit;
 import org.example.dynamic_entity.Carrot;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class GameMap {
 
     public void deleteEntity(Coordinate coordinate) {
         if (carrotAmount() < 1){
-            new CarrotInitAction(this).create();
+            new CarrotInit(this).create();
         }
         entities.remove(coordinate);
     }

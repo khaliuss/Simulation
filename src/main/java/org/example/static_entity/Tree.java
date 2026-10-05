@@ -2,10 +2,11 @@ package org.example.static_entity;
 
 import org.example.abstraction.Coordinate;
 import org.example.abstraction.Entity;
+import org.example.abstraction.Obstacle;
 
 import static org.example.Constants.TREE_EMOJI;
 
-public class Tree extends Entity {
+public class Tree extends Obstacle {
     public Tree(Coordinate coordinate) {
         super(coordinate);
     }
