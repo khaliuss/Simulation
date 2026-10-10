@@ -6,12 +6,22 @@ import org.example.actions.inits.*;
 import org.example.actions.turns.CreatureTurn;
 
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Simulation {
 
-    GameMap gameMap = new GameMap();
-    PathFinder pathFinder = new PathFinder(gameMap);
-    Renderer renderer = new Renderer();
+    private GameMap gameMap = new GameMap();
+    private PathFinder pathFinder = new PathFinder(gameMap);
+    private Renderer renderer = new Renderer();
+
+    private BlockingQueue<Runnable> queue = new LinkedBlockingDeque<>();
+    private ExecutorService executorService = Executors.newFixedThreadPool(5);
+    private final AtomicBoolean isPaused = new AtomicBoolean();
+    private final Object monitor = new Object();
     private int moveCounter = 0;
 
     private final List<InitAction> initActions = List.of(
@@ -33,31 +43,53 @@ public class Simulation {
     }
 
     public void nextTurn() {
-        System.out.print("\033[H\033[2J");
-        renderer.render(gameMap);
-        System.out.println();
-        for (TurnAction action : turnActions) {
-            action.makeMove();
+        executorService.submit(() -> {
+            queue.add(task());
+        });
+
+        try {
+            executorService.submit(queue.take());
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        moveCounter++;
     }
 
+    private Runnable task() {
+        return () -> {
+            System.out.print("\033[H\033[2J");
+            renderer.render(gameMap);
+
+            for (TurnAction action : turnActions) {
+                action.makeMove();
+            }
+            moveCounter++;
+        };
+    }
 
 
     public void startSimulation() {
-        while (true){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            nextTurn();
+        synchronized (monitor) {
+            isPaused.set(false);
+            monitor.notifyAll();
         }
+
+
+        executorService.submit(() -> {
+            while (true) {
+                synchronized (monitor) {
+                    if (isPaused.get()) {
+                        monitor.wait();
+                    }
+                }
+                nextTurn();
+            }
+        });
     }
 
-    public void pauseSimulation() {
-        System.exit(0);
-    }
 
+    public void pauseSimulation(boolean pause) {
+        isPaused.set(pause);
+    }
 
 }

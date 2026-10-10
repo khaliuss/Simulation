@@ -4,7 +4,7 @@ import org.example.GameMap;
 import org.example.PathFinder;
 import org.example.abstraction.Coordinate;
 import org.example.actions.InitAction;
-import org.example.dynamic_entity.Rabbit;
+import org.example.dynamicentity.Rabbit;
 import static org.example.Constants.GRID_COL;
 import static org.example.Constants.GRID_ROW;
 

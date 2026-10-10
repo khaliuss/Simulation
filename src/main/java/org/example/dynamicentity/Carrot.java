@@ -1,4 +1,4 @@
-package org.example.dynamic_entity;
+package org.example.dynamicentity;
 
 import org.example.abstraction.Coordinate;
 import org.example.abstraction.Entity;

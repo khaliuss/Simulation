@@ -10,25 +10,21 @@ public class Main {
         simulation.creat();
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
-            String choice = makeChoice(scanner);
+        System.out.print("Запустить бесконечный цикл симуляции [1] Сделать один ход [2] Остановить симуляцию [3]: ");
 
-            switch (choice){
-                case  "1" -> simulation.startSimulation();
-                case "2" -> simulation.pauseSimulation();
-                case "3" -> simulation.nextTurn();
+        while (true) {
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> simulation.startSimulation();
+                case "2" -> simulation.nextTurn();
+                case "3" -> simulation.pauseSimulation(true);
                 default -> System.out.println("Введите коректные значения!!!");
             }
         }
 
 
     }
-
-    private static String makeChoice(Scanner scanner){
-        System.out.print("Запустить бесконечный цикл симуляции [1] Остановить симуляцию [2] сделать один ход [3]: ");
-        return scanner.nextLine();
-    }
-
-
 
 }

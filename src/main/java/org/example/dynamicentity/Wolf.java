@@ -1,4 +1,4 @@
-package org.example.dynamic_entity;
+package org.example.dynamicentity;
 
 import org.example.GameMap;
 import org.example.PathFinder;
@@ -24,7 +24,7 @@ public class Wolf extends Predator {
             gameMap.deleteEntity(this.coordinate);
             return;
         }
-        targetQueue.addAll(pathFinder.targetCoordinate(coordinate, this));
+        targetQueue.addAll(pathFinder.find(coordinate, this));
 
         for (int i = 0; i < speed; i++) {
             Coordinate newCoordinate = targetQueue.poll();

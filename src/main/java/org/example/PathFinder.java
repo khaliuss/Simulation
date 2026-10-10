@@ -1,10 +1,9 @@
 package org.example;
 
 import org.example.abstraction.*;
-import org.example.dynamic_entity.Carrot;
-import org.example.dynamic_entity.Rabbit;
-import org.example.dynamic_entity.Wolf;
-import org.example.static_entity.Rock;
+import org.example.dynamicentity.Carrot;
+import org.example.dynamicentity.Rabbit;
+import org.example.dynamicentity.Wolf;
 
 import java.util.*;
 
@@ -29,8 +28,8 @@ public class PathFinder {
 
     private void findAvailable(Coordinate cameFrom, Entity foodSeeker) {
         for (int i = 0; i < 8; i++) {
-            int moveRow = dRow[i] + cameFrom.coordinateX;
-            int moveCol = dCol[i] + cameFrom.coordinateY;
+            int moveRow = dRow[i] + cameFrom.X;
+            int moveCol = dCol[i] + cameFrom.Y;
             if ((moveRow >= 0 && moveRow < GRID_ROW) && (moveCol >= 0 && moveCol < GRID_COL)) {
                 Coordinate coordinate = new Coordinate(moveRow, moveCol);
                 if (gameMap.getEntity(coordinate) instanceof Obstacle) {
@@ -56,7 +55,7 @@ public class PathFinder {
         }
     }
 
-    public List<Coordinate> targetCoordinate(Coordinate currentPosition, Entity foodSeeker) {
+    public List<Coordinate> find(Coordinate currentPosition, Entity foodSeeker) {
         queue.clear();
         visited.clear();
         List<Coordinate> path = new ArrayList<>();

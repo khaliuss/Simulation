@@ -4,7 +4,7 @@ import org.example.abstraction.Coordinate;
 import org.example.abstraction.Creature;
 import org.example.abstraction.Entity;
 import org.example.actions.inits.CarrotInit;
-import org.example.dynamic_entity.Carrot;
+import org.example.dynamicentity.Carrot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,13 +38,13 @@ public class GameMap {
     }
 
     public void deleteEntity(Coordinate coordinate) {
-        if (carrotAmount() < 1){
+        if (calculateCarrotAmount() < 1){
             new CarrotInit(this).create();
         }
         entities.remove(coordinate);
     }
 
-    private int carrotAmount() {
+    private int calculateCarrotAmount() {
         int count = 0;
         for (Entity entity : entities.values()){
             if (entity instanceof Carrot){

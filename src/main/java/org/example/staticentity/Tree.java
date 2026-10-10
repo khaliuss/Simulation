@@ -1,7 +1,6 @@
-package org.example.static_entity;
+package org.example.staticentity;
 
 import org.example.abstraction.Coordinate;
-import org.example.abstraction.Entity;
 import org.example.abstraction.Obstacle;
 
 import static org.example.Constants.TREE_EMOJI;

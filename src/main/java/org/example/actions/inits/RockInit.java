@@ -3,7 +3,7 @@ package org.example.actions.inits;
 import org.example.GameMap;
 import org.example.abstraction.Coordinate;
 import org.example.actions.InitAction;
-import org.example.static_entity.Rock;
+import org.example.staticentity.Rock;
 
 import static org.example.Constants.GRID_COL;
 import static org.example.Constants.GRID_ROW;

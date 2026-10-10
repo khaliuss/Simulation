@@ -3,23 +3,23 @@ package org.example.abstraction;
 import java.util.Objects;
 
 public class Coordinate {
-    public int coordinateX;
-    public int coordinateY;
+    public int X;
+    public int Y;
 
-    public Coordinate(int coordinateX, int coordinateY) {
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+    public Coordinate(int X, int Y) {
+        this.X = X;
+        this.Y = Y;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Coordinate that = (Coordinate) o;
-        return coordinateX == that.coordinateX && coordinateY == that.coordinateY;
+        return X == that.X && Y == that.Y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(coordinateX, coordinateY);
+        return Objects.hash(X, Y);
     }
 }
